@@ -1,0 +1,26 @@
+{
+  "name": "85sytdl",
+  "version": "1.0.0",
+  "description": "Youtube MP3 Downloader by 85",
+  "main": "index.js",
+  "dependencies": {
+    "electron": "^11.0.3",
+    "fs": "^0.0.1-security",
+    "progress": "^2.0.3",
+    "ytdl-core": "^4.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "GreXLin85",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreXLin85/85sYTDL.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GreXLin85/85sYTDL/issues"
+  },
+  "homepage": "https://github.com/GreXLin85/85sYTDL#readme"
+}
