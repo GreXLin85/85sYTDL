@@ -17,17 +17,18 @@
             <h2>85's Youtube Downloader</h2>
         </div>
         <div class="input-field col s12">
-            <input id="link" type="text" class="validate">
+            <textarea id="link" onchange="howMuchLinks()" class="materialize-textarea"></textarea>
             <label for="link">Link</label>
         </div>
         <div class="input-field col s12" style="text-align: center;">
-            <button class="btn waves-effect waves-light" onclick="sendLink()" type="submit" id="download" name="action">Download!</button>
+            <button class="btn waves-effect waves-light" onclick="sendLink()" type="submit" id="download"
+                name="action">Download!</button>
         </div>
         <div class="input-field col s12" style="text-align: center;">
             <progress style="width: 100%;" id="file" value="0" max="800"> 32% </progress>
         </div>
         <div class="input-field col s12" id="indirmeDurum" style="text-align: center;">
-            
+
         </div>
 
     </div>
@@ -41,33 +42,29 @@
 
     ipcRenderer.on('linkreply', (event, arg) => {
         document.getElementById("download").removeAttribute("disabled")
+        document.getElementById("link").removeAttribute("disabled")
         if (arg == "ok") {
             document.getElementById("indirmeDurum").innerText = "Download Completed!"
         } else if (arg == "error") {
             document.getElementById("indirmeDurum").innerText = "There Is An Error!"
-        }else {
-            alert("Böyle bir durum yok!"+arg)
+        } else {
+            alert("Böyle bir durum yok!" + arg)
         }
     })
-    let progressBar = document.getElementById("file")
-    ipcRenderer.on('progress', (event, arg) => {
-        console.log(arg)
-
-        progressBar.value = arg
-    })
-    ipcRenderer.on('started', (event, arg) => {
-        console.log(arg)
-        
-
-        progressBar.max = arg
+    ipcRenderer.on('downloadcount', (event, arg) => {
+        document.getElementById("file").value = document.getElementById("file").value + 1
     })
     function sendLink() {
         document.getElementById("indirmeDurum").innerText = ""
         document.getElementById("download").disabled = "disabled"
-        ipcRenderer.send('link', document.getElementById("link").value)
+        document.getElementById("link").disabled = "disabled"
+        ipcRenderer.send('links', document.getElementById("link").value)
 
     }
-    
+    function howMuchLinks() {
+        let lengthOfLinks = document.getElementById("link").value.split("\n").length
+        document.getElementById("file").setAttribute("max", lengthOfLinks)
+    }
 
 </script>
 
